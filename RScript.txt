@@ -1,0 +1,31 @@
+library(GEOquery)
+
+install.packages("BiocManager")
+BiocManager::install("GEOquery")
+
+#downloading raw data.
+my_id <- "GSE3307"
+gse <- getGEO(my_id)
+#extracting count matrix
+exprs(gse[[1]])
+
+
+#taking a look on type of samples
+metadata=pData(gse[[1]])
+
+
+countMatrix<-exprs(gse[[1]])
+countMatrixWithTargetValues <- rbind(countMatrix, metadata[,10])
+write.table(countMatrixWithTargetValues,file="E:\\dataIWithTargetValues.txt",row.names = T, col.names = T)
+
+metadata=pData(gse[[2]])
+countMatrix<-exprs(gse[[2]])
+countMatrixWithTargetValues <- rbind(countMatrix, metadata[,10])
+write.table(countMatrixWithTargetValues,file="E:\\dataIIWithTargetValues.txt",row.names = T, col.names = T)
+
+
+
+
+
+
+
